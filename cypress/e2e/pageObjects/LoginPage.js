@@ -20,6 +20,45 @@ class LoginPage {
       .should("be.visible") // check it's visible
       .and("contain.text", "Invalid credentials"); // check it contains the expected text
   }
+
+  // click login without entering username/password
+  clickLogin() {
+    cy.get("button[type='submit']").click();
+  }
+
+  // verify required validations (shown when fields are empty)
+  verifyRequiredValidation() {
+    cy.get(".oxd-input-field-error-message")
+      .should("be.visible")
+      .and("contain.text", "Required");
+  }
+
+  // forgot password flow
+  clickForgotPassword() {
+    cy.contains("Forgot your password?").click();
+  }
+
+  verifyResetPasswordPage() {
+    cy.url().should("include", "/auth/requestPasswordResetCode");
+  }
+
+  // password masking check
+  verifyPasswordIsMasked() {
+    cy.get("input[name='password']").should("have.attr", "type", "password");
+  }
+
+  // type a sample password to confirm it is masked (still type="password")
+  enterSamplePassword() {
+    cy.get("input[name='password']").clear().type("Test@123", { log: false });
+  }
+
+
+  // demo credentials hint exists on login page
+  verifyDemoCredentialsHint() {
+    cy.contains("Username").should("be.visible");
+    cy.contains("Password").should("be.visible");
+  }
+
 }
 
 export default LoginPage;

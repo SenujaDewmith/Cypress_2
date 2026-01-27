@@ -31,3 +31,32 @@ When("I login as the Admin with invalid password", () => {
 Then("I should see an error message", () => {
   loginPage.verifyError();
 });
+
+// Steps for other test scenarios
+When("I click login without entering username and password", () => {
+  loginPage.clickLogin();
+});
+
+Then("I should see required validation messages", () => {
+  loginPage.verifyRequiredValidation();
+});
+
+When("I click Forgot your password link", () => {
+  loginPage.clickForgotPassword();
+});
+
+Then("I should be navigated to reset password page", () => {
+  loginPage.verifyResetPasswordPage();
+});
+
+When("I enter a sample password in password field", () => {
+  loginPage.enterSamplePassword();
+});
+
+Then("Password field should be masked", () => {
+  loginPage.verifyPasswordIsMasked();
+});
+
+Then("I should see demo credentials hint on login page", () => {
+  loginPage.verifyDemoCredentialsHint();
+});
