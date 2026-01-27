@@ -13,12 +13,14 @@ class LoginPage {
 
   verifySuccessfulLogin() {
     cy.url().should("include", "/dashboard");
+    cy.wait(3000);
   }
 
   verifyError() {
     cy.get("div.oxd-alert.oxd-alert--error p.oxd-alert-content-text") // select the error element
       .should("be.visible") // check it's visible
       .and("contain.text", "Invalid credentials"); // check it contains the expected text
+    cy.wait(3000);
   }
 
   // click login without entering username/password
@@ -31,6 +33,7 @@ class LoginPage {
     cy.get(".oxd-input-field-error-message")
       .should("be.visible")
       .and("contain.text", "Required");
+    cy.wait(2000);
   }
 
   // forgot password flow
@@ -40,6 +43,7 @@ class LoginPage {
 
   verifyResetPasswordPage() {
     cy.url().should("include", "/auth/requestPasswordResetCode");
+    cy.wait(3000);
   }
 
   // password masking check
@@ -50,10 +54,9 @@ class LoginPage {
   // type a sample password to confirm it is masked (still type="password")
   enterSamplePassword() {
     cy.get("input[name='password']").clear().type("Test@123", { log: false });
+    cy.wait(3000);
   }
 
-
-  // demo credentials hint exists on login page
   verifyDemoCredentialsHint() {
     cy.contains("Username").should("be.visible");
     cy.contains("Password").should("be.visible");
