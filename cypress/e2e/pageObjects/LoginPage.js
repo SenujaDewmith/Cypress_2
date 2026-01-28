@@ -51,7 +51,7 @@ class LoginPage {
     cy.get("input[name='password']").should("have.attr", "type", "password");
   }
 
-  // type a sample password to confirm it is masked (still type="password")
+  // type a sample password to confirm it is masked
   enterSamplePassword() {
     cy.get("input[name='password']").clear().type("Test@123", { log: false });
     cy.wait(3000);
