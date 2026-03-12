@@ -28,3 +28,5 @@ Feature: login functionality
   Scenario: Login page shows demo credentials hint
     Given I open the OrangeHRM login page
     Then I should see demo credentials hint on login page
+
+
