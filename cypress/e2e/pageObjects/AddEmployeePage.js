@@ -74,6 +74,60 @@ verifyLastNameRequired() {
 }
 
 
+//methods for duplicate ID
+
+captureGeneratedEmployeeId() {
+  cy.contains("label", "Employee Id")
+    .parents(".oxd-input-group")
+    .find("input")
+    .invoke("val")
+    .then((employeeId) => {
+      cy.wrap(employeeId).as("employeeId");
+    });
+}
+
+
+enterCapturedEmployeeIdAndBlur() {
+  cy.get("@employeeId").then((employeeId) => {
+    cy.contains("label", "Employee Id")
+      .parents(".oxd-input-group")
+      .find("input")
+      .clear()
+      .type(employeeId)
+      .blur();
+  });
+}
+
+
+verifyPersonalDetailsPage() {
+  cy.location("pathname", { timeout: 10000 }).should("include", "/viewPersonalDetails");
+  cy.contains("h6", "Personal Details", { timeout: 10000 }).should("be.visible");
+}
+
+verifyDuplicateEmployeeIdValidation() {
+  cy.contains(/already exists/i, { timeout: 10000 }).should("be.visible");
+}
+
+//invalid image validation
+uploadInvalidEmployeeImage(fileName) {
+  cy.get("input[type='file']").selectFile(`cypress/fixtures/${fileName}`, { force: true });
+}
+
+verifyInvalidFileTypeValidation() {
+  cy.contains(/invalid file|file type|jpg|png|gif/i, { timeout: 10000 }).should("be.visible");
+}
+
+
+//image size > 1MB
+
+uploadLargeEmployeeImage(fileName) {
+  cy.get("input[type='file']").selectFile(`cypress/fixtures/${fileName}`, { force: true });
+}
+
+verifyEmployeeImageSizeValidation() {
+  cy.contains(/1 mb|1mb|file too large|exceeds/i, { timeout: 10000 }).should("be.visible");
+}
+
 
 
 }

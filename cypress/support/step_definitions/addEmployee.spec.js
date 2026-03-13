@@ -69,3 +69,40 @@ When("I enter employee first name {string}", (firstName) => {
 Then("I should see required validation for last name", () => {
   addEmployeePage.verifyLastNameRequired();
 });
+
+//Duplicate ID validation
+
+When("I capture the generated employee id", () => {
+  addEmployeePage.captureGeneratedEmployeeId();
+});
+
+When("I enter the captured employee id and move out from the field", () => {
+  addEmployeePage.enterCapturedEmployeeIdAndBlur();
+});
+
+Then("I should be navigated to personal details page", () => {
+  addEmployeePage.verifyPersonalDetailsPage();
+});
+
+Then("I should see duplicate employee id validation", () => {
+  addEmployeePage.verifyDuplicateEmployeeIdValidation();
+});
+
+//invalid image type
+When("I upload an invalid employee image {string}", (fileName) => {
+  addEmployeePage.uploadInvalidEmployeeImage(fileName);
+});
+
+Then("I should see invalid file type validation for employee image", () => {
+  addEmployeePage.verifyInvalidFileTypeValidation();
+});
+
+
+//large image size validation
+When("I upload a large employee image {string}", (fileName) => {
+  addEmployeePage.uploadLargeEmployeeImage(fileName);
+});
+
+Then("I should see file size validation for employee image", () => {
+  addEmployeePage.verifyEmployeeImageSizeValidation();
+});
