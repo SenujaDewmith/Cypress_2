@@ -40,6 +40,7 @@ Then("I should see the employee personal details page", () => {
   addEmployeePage.verifyEmployeeAdded();
 });
 
+//first name automation
 When("I navigate to Add Employee page", () => {
   addEmployeePage.goToAddEmployeePage();
 });
@@ -58,4 +59,13 @@ When("I click on Save button in Add Employee page", () => {
 
 Then("I should see required validation for first name", () => {
   addEmployeePage.verifyFirstNameRequired();
+});
+
+//last name automation
+When("I enter employee first name {string}", (firstName) => {
+  addEmployeePage.enterFirstName(firstName);
+});
+
+Then("I should see required validation for last name", () => {
+  addEmployeePage.verifyLastNameRequired();
 });

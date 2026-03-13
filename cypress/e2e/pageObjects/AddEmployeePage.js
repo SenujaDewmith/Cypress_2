@@ -35,15 +35,6 @@ class AddEmployeePage {
     cy.get("input[type='file']").selectFile(`cypress/fixtures/${fileName}`, { force: true });
   }
 
-  // new functions
-  enterMiddleName(middleName) {
-    cy.get("input[name='middleName']").clear().type(middleName);
-  }
-
-  enterLastName(lastName) {
-    cy.get("input[name='lastName']").clear().type(lastName);
-  }
-
   clickSave() {
     cy.contains("button", "Save").click();
   }
@@ -53,7 +44,14 @@ class AddEmployeePage {
   cy.contains("h6", "Personal Details", { timeout: 10000 }).should("be.visible");
   }
 
-  // New
+  // first name validation
+  enterMiddleName(middleName) {
+    cy.get("input[name='middleName']").clear().type(middleName);
+  }
+
+  enterLastName(lastName) {
+    cy.get("input[name='lastName']").clear().type(lastName);
+  }
   verifyFirstNameRequired() {
     cy.get("input[name='firstName']")
       .parents(".oxd-input-group")
@@ -61,6 +59,21 @@ class AddEmployeePage {
       .should("be.visible")
       .and("contain.text", "Required");
   }
+
+  // last name validation
+  enterFirstName(firstName) {
+  cy.get("input[name='firstName']").clear().type(firstName);
+}
+
+verifyLastNameRequired() {
+  cy.get("input[name='lastName']")
+    .parents(".oxd-input-group")
+    .find(".oxd-input-field-error-message")
+    .should("be.visible")
+    .and("contain.text", "Required");
+}
+
+
 
 
 }
