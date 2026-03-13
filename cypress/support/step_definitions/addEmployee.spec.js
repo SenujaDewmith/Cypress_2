@@ -39,3 +39,23 @@ When("I click save on add employee page", () => {
 Then("I should see the employee personal details page", () => {
   addEmployeePage.verifyEmployeeAdded();
 });
+
+When("I navigate to Add Employee page", () => {
+  addEmployeePage.goToAddEmployeePage();
+});
+
+When("I enter employee middle name {string}", (middleName) => {
+  addEmployeePage.enterMiddleName(middleName);
+});
+
+When("I enter employee last name {string}", (lastName) => {
+  addEmployeePage.enterLastName(lastName);
+});
+
+When("I click on Save button in Add Employee page", () => {
+  addEmployeePage.clickSave();
+});
+
+Then("I should see required validation for first name", () => {
+  addEmployeePage.verifyFirstNameRequired();
+});

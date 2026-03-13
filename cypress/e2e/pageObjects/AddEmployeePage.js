@@ -17,9 +17,11 @@ class AddEmployeePage {
 
   goToAddEmployeePage() {
     cy.contains("span", "PIM").click();
+    cy.wait(7000);
     cy.contains("a", "Add Employee").click();
-    cy.url().should("include", "/pim/addEmployee");
     cy.wait(5000);
+    cy.url().should("include", "/pim/addEmployee");
+    cy.wait(7000);
   }
 
   fillEmployeeDetails(firstName, middleName, lastName) {
@@ -33,6 +35,15 @@ class AddEmployeePage {
     cy.get("input[type='file']").selectFile(`cypress/fixtures/${fileName}`, { force: true });
   }
 
+  // new functions
+  enterMiddleName(middleName) {
+    cy.get("input[name='middleName']").clear().type(middleName);
+  }
+
+  enterLastName(lastName) {
+    cy.get("input[name='lastName']").clear().type(lastName);
+  }
+
   clickSave() {
     cy.contains("button", "Save").click();
   }
@@ -40,6 +51,15 @@ class AddEmployeePage {
   verifyEmployeeAdded() {
   cy.location("pathname", { timeout: 10000 }).should("include", "/viewPersonalDetails");
   cy.contains("h6", "Personal Details", { timeout: 10000 }).should("be.visible");
+  }
+
+  // New
+  verifyFirstNameRequired() {
+    cy.get("input[name='firstName']")
+      .parents(".oxd-input-group")
+      .find(".oxd-input-field-error-message")
+      .should("be.visible")
+      .and("contain.text", "Required");
   }
 
 
