@@ -5,7 +5,7 @@ Feature: Add Employee Upload Validations
     When I navigate to Add Employee page
     And I enter employee first name "John"
     And I enter employee last name "David"
-    And I upload an invalid employee image "invalidFile.txt"
+    And I upload an invalid employee image "credentials.json"
     Then I should see invalid file type validation for employee image
 
   Scenario: User should see validation when uploaded employee image exceeds 1 MB

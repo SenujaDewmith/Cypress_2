@@ -19,13 +19,29 @@ When("I navigate to the Add Employee page", () => {
   addEmployeePage.goToAddEmployeePage();
 });
 
+// 🔹 ADD THIS: set a specific employee id from feature file
+When("I set employee id {string}", (employeeId) => {
+  addEmployeePage.setEmployeeId(employeeId);
+});
+
+// 🔹 ADD THIS: set a random employee id
+When("I set a random employee id", () => {
+  addEmployeePage.setRandomEmployeeId();
+});
+
+
+
+
+// addEmployee.spec.js for happy path only
 When("I fill the add employee form", () => {
+  const random = Date.now().toString().slice(-4);
   addEmployeePage.fillEmployeeDetails(
-    crd.employee.firstName,
+    `${crd.employee.firstName}${random}`,
     crd.employee.middleName,
-    crd.employee.lastName
+    `${crd.employee.lastName}${random}`
   );
 });
+
 
 
 When("I upload an employee image", () => {
